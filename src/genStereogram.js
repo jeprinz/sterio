@@ -2,10 +2,10 @@
 
 // based on https://www.cs.waikato.ac.nz/~ih.w/papers/94-HWT-SI-IHW-SIRDS-paper.pdf
 
-type DrawFunction = (number,number,number) => void //x,y,value
-type DepthFunction = (number,number) => number //x,y, depth (between 0  and 1)
+export type DrawFunction = (number,number,number) => void //x,y,value
+export type DepthFunction = (number,number) => number //x,y, depth (between 0  and 1)
 
-function genStereogram(Z: DepthFunction, maxX: number, maxY: number, drawPoint: DrawFunction, mu: number, dpi: number) {
+export function genStereogram(Z: DepthFunction, maxX: number, maxY: number, drawPoint: DrawFunction, mu: number, dpi: number) {
   dpi = dpi || 100 //dots per inch
   mu = mu || 1/3
   const eyeSeparation = 2.5 // inches (since dpi)
