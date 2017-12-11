@@ -1,5 +1,7 @@
 //@flow
 
+import type {DepthFunction} from "./genStereogram"
+
 let depthMap = new Array(768)
 let x, y
 for (y = 0; y < depthMap.length; y++) {
@@ -11,4 +13,17 @@ for (y = 0; y < depthMap.length; y++) {
 
 export function Z(x: number, y: number): number {
   return depthMap[y][x]
+}
+
+export function makeDepthFunction(width: number, height: number): DepthFunction{
+  function depth(x: number, y: number) {
+      let r = Math.min(width/4, height/4)
+      if (Math.abs(x - width/2) < r && Math.abs(y - height/2) < r) {
+        return Math.sqrt(1 - ((x - width/2)/r)^2  - ((y - height/2)/r)^2)
+      }
+      else {
+          return 0
+      }
+  }
+  return depth
 }
