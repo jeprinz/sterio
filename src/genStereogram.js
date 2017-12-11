@@ -14,8 +14,13 @@ export function drawStereogram(drawFunction: DrawFunction, width: number, height
 
 // based on https://www.cs.waikato.ac.nz/~ih.w/papers/94-HWT-SI-IHW-SIRDS-paper.pdf
 function genStereogram(Z: DepthFunction, maxX: number, maxY: number, drawPoint: DrawFunction, mu: number, dpi: number) {
-  dpi = dpi || 100 //dots per inch
-  mu = mu || 1/3
+  /*let u,v
+  for (v = 0; v < maxY; v++) {
+    for (u = 0; u < maxX; u++) {
+      drawPoint(u,v,Math.floor(255*Z(u,v)))
+    }
+  }
+  return*/
   const eyeSeparation = 2.5 // inches (since dpi)
   let E = round(dpi*eyeSeparation)
   let x, y
@@ -40,12 +45,12 @@ function genStereogram(Z: DepthFunction, maxX: number, maxY: number, drawPoint: 
         let zt
         do {
           zt = z + 2*(2 - mu*z)*t/(mu*E) //geometry
-          visible = (Z(t - x, y) < zt) && (Z(t + x, y) < zt)
+          visible = (Z(x - t, y) < zt) && (Z(x + t, y) < zt)
           t++
         } while ((visible != false) && (zt < 1))
         if (visible) {
           let l = same[left]
-          while (l != left && l != right) {
+          while ((l != left) && (l != right)) {
             if (l < right) {
               left = l
               l = same[left]
@@ -63,7 +68,7 @@ function genStereogram(Z: DepthFunction, maxX: number, maxY: number, drawPoint: 
     }
 
     for (x = maxX - 1; x >= 0; x--) {
-      if (same[x] = x) {
+      if (same[x] == x) {
         let value = Math.floor(256*Math.random())
         pix[x] = value
       }

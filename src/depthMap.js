@@ -18,8 +18,8 @@ export function Z(x: number, y: number): number {
 export function makeDepthFunction(width: number, height: number): DepthFunction{
   function depth(x: number, y: number) {
       let r = Math.min(width/4, height/4)
-      if (Math.abs(x - width/2) < r && Math.abs(y - height/2) < r) {
-        return Math.sqrt(1 - ((x - width/2)/r)^2  - ((y - height/2)/r)^2)
+      if (Math.pow((x - width/2),2) + Math.pow((y - height/2),2) < Math.pow(r,2)) {
+        return Math.sqrt(1 - Math.pow(((x - width/2)/r),2)  - Math.pow(((y - height/2)/r),2))
       }
       else {
           return 0
