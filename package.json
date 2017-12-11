@@ -1,0 +1,31 @@
+{
+  "name": "sterio",
+  "version": "0.0.0",
+  "description": "",
+  "main": "test.js",
+  "scripts": {
+    "compile": "babel src/ -D lib/",
+    "flow": "flow",
+    "webpack": "webpack --watch",
+    "repl": "babel-node",
+    "test": "babel-node test/testReducer.js"
+  },
+  "author": "Jacob Prinz <jacobeliasprinz@gmail.com>",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-cli": "^6.24.0",
+    "babel-loader": "^6.4.1",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-es2015": "^6.24.0",
+    "babel-preset-flow": "^6.23.0",
+    "babel-preset-stage-0": "^6.22.0",
+    "flow-bin": "^0.42.0",
+    "webpack": "^2.3.2"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.23.0",
+    "babel-runtime": "^6.23.0",
+    "jquery": "^3.2.1",
+    "onlyjs": "0.0.2"
+  }
+}
