@@ -4,15 +4,17 @@
 
 import {makeDepthFunction} from "./depthMap"
 
-export type DrawFunction = (number,number,number) => void //x,y,value
+export type DrawFunction = (number,number, RGB) => void //x,y,rgb
 export type DepthFunction = (number,number) => number //x,y, depth (between 0  and 1)
+
+export type RGB = {r: number, g: number, b: number}
 
 export function drawStereogram(drawFunction: DrawFunction, width: number, height: number) {
   const Z = makeDepthFunction(width, height)
-  genStereogram(Z, width, height, drawFunction, 1/3, 100)
+  genStereogram(Z, width, height, drawFunction, 1/3, 64)
 }
 
-// based on https://www.cs.waikato.ac.nz/~ih.w/papers/94-HWT-SI-IHW-SIRDS-paper.pdf
+// based on https://www.cs.waikato.ac.nz/~ihw/papers/94-HWT-SI-IHW-SIRDS-paper.pdf
 function genStereogram(Z: DepthFunction, maxX: number, maxY: number, drawPoint: DrawFunction, mu: number, dpi: number) {
   /*let u,v
   for (v = 0; v < maxY; v++) {
@@ -25,7 +27,7 @@ function genStereogram(Z: DepthFunction, maxX: number, maxY: number, drawPoint: 
   let E = round(dpi*eyeSeparation)
   let x, y
   for (y = 0; y < maxY; y++) {
-    let pix = new Array(maxX)
+    let pix: Array<RGB> = new Array(maxX)
     let same = new Array(maxX) // same[a] = b means a and b are the same color
     let s
     let left, right
@@ -49,6 +51,7 @@ function genStereogram(Z: DepthFunction, maxX: number, maxY: number, drawPoint: 
           t++
         } while ((visible != false) && (zt < 1))
         if (visible) {
+        //if (true) {
           let l = same[left]
           while ((l != left) && (l != right)) {
             if (l < right) {
@@ -69,8 +72,12 @@ function genStereogram(Z: DepthFunction, maxX: number, maxY: number, drawPoint: 
 
     for (x = maxX - 1; x >= 0; x--) {
       if (same[x] == x) {
-        let value = Math.floor(256*Math.random())
-        pix[x] = value
+        let r = Math.floor(256*Math.random())
+        let g = Math.floor(256*Math.random())
+        let b = Math.floor(256*Math.random())
+        //let value = Math.floor(Math.pow(2, 8*Math.random()))
+        //let value = Math.floor((x - maxX/2)*(x - maxX/2) % 256)
+        pix[x] = {r: r, g: g, b: b}
       }
       else {
         pix[x] = pix[same[x]]
