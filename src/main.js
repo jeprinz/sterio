@@ -5,6 +5,8 @@
 import only from "onlyjs"
 import {setupCanvas} from "./graphics"
 
+console.log('hi')
+
 //First set up page
 
 const canvas = only.html({canvas: "", width: 500, height: 500,

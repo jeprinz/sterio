@@ -15,7 +15,8 @@ export function drawStereogram(drawFunction: DrawFunction, width: number, height
 }
 
 // based on https://www.cs.waikato.ac.nz/~ihw/papers/94-HWT-SI-IHW-SIRDS-paper.pdf
-function genStereogram(Z: DepthFunction, maxX: number, maxY: number, drawPoint: DrawFunction, mu: number, dpi: number) {
+function genStereogram(Z: DepthFunction, maxX: number, maxY: number,
+  drawPoint: DrawFunction, mu: number, dpi: number) {
   /*let u,v
   for (v = 0; v < maxY; v++) {
     for (u = 0; u < maxX; u++) {

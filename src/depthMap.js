@@ -27,3 +27,33 @@ export function makeDepthFunction(width: number, height: number): DepthFunction{
   }
   return depth
 }
+
+export function makeLeftDepthFunction(width: number, height: number): DepthFunction{
+  function depth(x: number, y: number) {
+      let r = Math.min(width/4, height/4)
+      if (x > width/2){
+        return -1
+      } else if (Math.pow((x - width/2),2) + Math.pow((y - height/2),2) < Math.pow(r,2)) {
+        return Math.sqrt(1 - Math.pow(((x - width/2)/r),2)  - Math.pow(((y - height/2)/r),2))
+      }
+      else {
+          return 0
+      }
+  }
+  return depth
+}
+
+export function makeRightDepthFunction(width: number, height: number): DepthFunction{
+  function depth(x: number, y: number) {
+      let r = Math.min(width/4, height/4)
+      if (x <= width/2){
+        return -1
+      } else if (Math.pow((x - width/2),2) + Math.pow((y - height/2),2) < Math.pow(r,2)) {
+        return Math.sqrt(1 - Math.pow(((x - width/2)/r),2)  - Math.pow(((y - height/2)/r),2))
+      }
+      else {
+          return 0
+      }
+  }
+  return depth
+}
